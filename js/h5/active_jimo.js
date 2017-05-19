@@ -582,7 +582,8 @@ $(function () {
             // });
             submitClick(obj,ajaxUrl);
             randomA(arr1);
-            link = window.location.href + '?name=' + nameVal + '&title=' + pageTitle;
+            // link = window.location.href + '?name=' + nameVal + '&title=' + pageTitle;
+            link = window.location.href + '#result';
 
             //打开第二页
             setTimeout(function () {
@@ -796,7 +797,8 @@ $(function () {
         submitClick(obj, ajaxUrl);
     });
 
-    if (url('?name')) {
+    //根据hash显示第二页
+    if (window.location.hash=='#result') {
         $('.active-page2').css({
             'display': 'block'
         });
@@ -804,14 +806,9 @@ $(function () {
             'display': 'none'
         });
 
-    } else {
-        $('.active-page2').css({
-            'display': 'none'
-        });
-        $('.active-page1').css({
-            'display': 'block'
-        });
     }
+
+    //分享
     initWxShare(Article);
 
     function generateTitle() {

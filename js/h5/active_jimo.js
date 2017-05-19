@@ -654,14 +654,14 @@ $(function () {
     //再测一遍
     $('.reload-back').on('touchend', function () {
         var obj = {
-            nameVal: $('.input-name').val(),
-            postVal: $('input[name="post"]:checked').val(),
-            sexVal: $('input[name="sex"]:checked').val(),
-            emotionVal: $('input[name="emotion"]:checked').val(),
+            name: $('.input-name').val(),
+            job: $('input[name="post"]:checked').val(),
+            gender: $('input[name="sex"]:checked').val(),
+            emotion: $('input[name="emotion"]:checked').val(),
             page: 2
         }
         submitClick(obj, ajaxUrl);
-
+        reLoad();
         // var nameVal = $('.input-name').val();
         // var postVal = $('input[name="post"]:checked').val();
         // var sexVal = $('input[name="sex"]:checked').val();

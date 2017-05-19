@@ -4,8 +4,10 @@ $(function() {
     var sexVal = $('input[name="sex"]:checked').val();
     var emotionVal = $('input[name="emotion"]:checked').val();
     var link = window.location.href;
-    console.log(link);
+
     var pageTitle = $('.page-info-title').text();
+
+    // 初始化头像，分享内容
     var arr1 = [{
             "title": '连单身狗都嫌弃TA',
             "info": "这种淡淡的失落，你大概也曾有过。——之前关系很好的学生，刚毕业那会儿还会经常联系，后来孩子长大了忙了。关于TA的消息只能从朋友圈知道，比如有了稳定的工作，比如有了自己的家庭。"
@@ -471,6 +473,8 @@ $(function() {
             }
         ]
     }
+
+    // 默认分享配置
     var Article = {
             title: generateTitle(),
             descs: '来测测你是不是一个寂寞感爆棚的老师',
@@ -478,18 +482,26 @@ $(function() {
             urlLink: link
         }
         //音乐自动播放
+    
+    
     // $('.audio-music').get(0).play();
     // autoPlayAudio();
+
+    //我的名字隐藏占位图片
     $('.form-input').on('touchend', function() {
         $('.input-tip').css({
             display: 'none'
         });
     });
+
+    //我的名字获得焦点，隐藏图片
     $('.input-name').on('focus', function() {
         $('.input-tip').css({
             display: 'none'
         });
     });
+
+    //我的名字失去焦点，判断是否有内容控制占位符显示
     $('.input-name').on('blur', function() {
         if ($('.input-name').val() == '') {
             $('.input-tip').css({
@@ -497,21 +509,31 @@ $(function() {
             });
         }
     });
+
+    //岗位选择
     $('.form-radio1').find('.form-label').on('touchend', function() {
         $(this).addClass('cur').siblings().removeClass('cur');
     });
+
+    //性别选择
     $('.form-radio2').find('.form-label').on('touchend', function() {
         $(this).addClass('cur').siblings().removeClass('cur');
     });
+
+    //感情选择
     $('.form-radio3').find('.form-label').on('touchend', function() {
         $(this).addClass('cur').siblings().removeClass('cur');
     });
+
+    //开始分析按钮
     $('.form-submit').on('touchend', function() {
         nameVal = $('.input-name').val();
         var postVal = $('input[name="post"]:checked').val();
         var sexVal = $('input[name="sex"]:checked').val();
         var emotionVal = $('input[name="emotion"]:checked').val();
         var pageVal = 1;
+        
+        //判断是否填写了所有信息
         if (nameVal == '' || sexVal == null || postVal == null || emotionVal == null) {
             $('.form-worn').css({
                 display: 'block'
@@ -537,6 +559,7 @@ $(function() {
                 });
             }, 300);
 
+            //上传点击量
             $.ajax({
                 type: 'POST',
                 url: 'http://www.fm820.com:8006/page/create',
@@ -550,6 +573,8 @@ $(function() {
             });
             randomA(arr1);
             link = window.location.href + '?name=' + nameVal + '&title=' + pageTitle;
+
+            //打开第二页
             setTimeout(function() {
                 $('.active-page1').css({
                     display: 'none'
@@ -675,6 +700,13 @@ $(function() {
         });
     });
 
+
+
+    /**
+     * 获得随机分享信息
+     * 
+     * @param {any} x 
+     */
     function randomA(x) {
         var temp = x[parseInt(Math.random() * x.length)];
         $('.page-info-title').html(temp.title);
